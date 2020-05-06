@@ -1,0 +1,1 @@
+CREATE DATABASE vocabulary_db;
