@@ -1,3 +1,3 @@
 const mysql = require("mysql");
 const express = require("express");
-const chart = require("chartjs");
+const charts = require("chartjs");
