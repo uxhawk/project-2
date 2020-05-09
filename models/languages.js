@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const Language = sequelize.define('Language', {
+  const Language = sequelize.define('language', {
     lang: {
       type: DataTypes.STRING,
       // AllowNull is a flag that restricts a todo from being
@@ -11,6 +11,9 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 32],
       },
     },
+  },
+  {
+    freezeTableName: true,
   });
   return Language;
 };
