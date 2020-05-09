@@ -11,4 +11,22 @@ module.exports = function(app) {
       res.json(data);
     });
   });
+
+  app.get('/api/languages', (req, res) => {
+    db.language.findAll({}).then((data) => {
+      res.json(data);
+    });
+  });
+
+  app.put('api/vocab/:id', (req, res) => {
+    db.vocab.update({
+      eng_phrase: req.body.newPhrase,
+      translation: req.body.newTranslation,
+    }, {
+      where: {
+        id: req.body.id,
+      },
+    },
+    );
+  });
 };
