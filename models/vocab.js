@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  const Vocab = sequelize.define('Vocab', {
+  const Vocab = sequelize.define('vocab', {
     eng_phrase: {
       type: DataTypes.STRING,
       // AllowNull is a flag that restricts a todo from being
@@ -29,6 +29,9 @@ module.exports = function(sequelize, DataTypes) {
         len: [1],
       },
     },
+  },
+  {
+    freezeTableName: true,
   });
   return Vocab;
 };
