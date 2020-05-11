@@ -2,39 +2,197 @@
 <html lang="en">
 
 <head>
-  <title>Lrn It Authentication</title>
+  <title>Lrn It</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="/assets/css/admin-styles.css" rel="stylesheet">
+  <!-- Bootstrap CSS-->
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  
+  <!-- Custom CSS-->
   <link href="/assets/css/styles.css" rel="stylesheet">
 
-   <!-- Custom fonts for this template-->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">   
+   <!-- Custom fonts-->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 </head>
+  <body class="bg-gradient-dark">
 
-<body>
-  <nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="/logout">
-        Logout
-      </a>
+    <div class="container-fluid m-0 p-0">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand " href="#"><h4 class="my-2">Lrn It</h4></a>
+          <!--*** Collapse button ***-->
+          <button id="hamburger" class="navbar-toggler second-button" type="button" data-toggle="collapse" data-target="#menu-links" aria-controls="menu-links" aria-expanded="false" aria-label="Toggle navigation">
+            <div class="animated-icon2">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+          </button>
+        <div class="collapse navbar-collapse justify-content-end" id="menu-links">
+          <div class="navbar-nav">
+            <a class="nav-item nav-link mr-4" href="#"><p><i class="fas fa-chart-line pr-2"></i>Metrics</p></a>
+            <a class="nav-item nav-link mr-4" href="#"><p><i class="fas fa-graduation-cap pr-2"></i>Study Mode</p></a>
+            <a class="nav-item nav-link" href="/logout"><p><i class="fas fa-sign-out-alt pr-2"></i>Sign Out</p></a>
+          </div>
+        </div>
+      </nav>
+
+      <section class="row mt-4 pt-4">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <div class="text-center">
+                <h2>New Translation</h2>
+              </div>
+              <form class="user" action="">
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="translate-from"><p>Translate From</p></label>
+                      <select class="form-control" id="translate-from">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="translate-to" ><p >Translate To</p></label>
+                      <select class="form-control" id="translate-to">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-12">
+                    <textarea class="form-control mb-2 translation" id="text-input" rows="3" name="tranlation"></textarea>
+                  </div>
+                </div>
+                <button type="submit" class=" mt-3 btn btn-primary btn-user btn-block btn-round">Translate</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row mt-4 pt-4">
+        <div class="col-md-10 offset-md-1">
+          <div class="row">
+            <div class="col-2">
+              <div class="form-group">
+                <label for="translate-from"><p class="text-white">Language Bank:</p></label>
+                <select class="form-control" id="translate-from">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-8 text-center">
+              <h3 class="text-white">Word Bank</h3>
+            </div>
+            <div class="col-2">
+              <div class="form-group">
+                <label for="translate-from"><p class="text-white">Sort By:</p></label>
+                <select class="form-control" id="translate-from">
+                  <option>1</option>
+                  <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="row">
+        <div class="col-md-10 offset-md-1">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="card mb-3">
+                <div class="d-flex card-header bg-transparent justify-content-between">
+                  <i class="far fa-trash-alt text-danger"></i><i class="fas fa-edit"></i>
+                </div>
+                <div class="card-body text-center">
+                  <p>Bonjour</p>
+                  <p class="mt-4 italics">Bonjour</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card mb-3">
+                <div class="d-flex card-header bg-transparent justify-content-between">
+                  <i class="far fa-trash-alt text-danger"></i><i class="fas fa-edit"></i>
+                </div>
+                <div class="card-body text-center">
+                  <p>Bonjour</p>
+                  <p class="mt-4 italics">Bonjour</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card mb-3">
+                <div class="d-flex card-header bg-transparent justify-content-between">
+                  <i class="far fa-trash-alt text-danger"></i><i class="fas fa-edit"></i>
+                </div>
+                <div class="card-body text-center">
+                  <p>Bonjour</p>
+                  <p class="mt-4 italics">Bonjour</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="card mb-3">
+                <div class="d-flex card-header bg-transparent justify-content-between">
+                  <i class="far fa-trash-alt text-danger"></i><i class="fas fa-edit"></i>
+                </div>
+                <div class="card-body text-center">
+                  <p>Bonjour</p>
+                  <p class="mt-4 italics">Bonjour</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+      </section>
     </div>
-  </div>
-</nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Welcome <span class="member-name"></span></h2>
-      </div>
-    </div>
-  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/assets/js/signup.js"></script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script
+    src="https://code.jquery.com/jquery-3.5.1.min.js"
+    integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+    crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-</body>
+    <!-- Core plugin JavaScript-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 
+    <!-- Custom scripts for all pages-->
+    <script type="text/javascript" src="/assets/js/index.js"></script>
+    
+
+  </body>
 </html>
+
+
+
+
+             
+ 
+            
