@@ -22,7 +22,21 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 256],
       },
     },
-    lang_id: {
+    from_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [1],
+      },
+    },
+    target_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        len: [1],
+      },
+    },
+    user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       validate: {

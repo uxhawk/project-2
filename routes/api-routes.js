@@ -71,6 +71,18 @@ module.exports = function(app) {
     });
   });
 
+  app.post('/api/vocab', (req, res)=> {
+    db.vocab.create({
+      eng_phrase: req.body.eng_phrase,
+      translation: req.body.translation,
+      from_id: req.body.from_id,
+      target_id: req.body.target_id,
+      user_id: req.body.user_id,
+    }).then((data)=> {
+      res.json(data);
+    });
+  });
+
   app.put('api/vocab/:id', (req, res) => {
     db.vocab.update({
       eng_phrase: req.body.newPhrase,
