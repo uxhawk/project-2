@@ -18,6 +18,7 @@ module.exports = function(app) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect('/members');
+      return;
       // res.render('index');
     }
     res.sendFile(path.join(__dirname, '../public/assets/signup.html'));
@@ -27,19 +28,21 @@ module.exports = function(app) {
     // If the user already has an account send them to the members page
     if (req.user) {
       res.redirect('/members');
+      return;
       // res.render('index');
     }
     res.sendFile(path.join(__dirname, '../public/assets/login.html'));
   });
 
-  app.get('/metrics', function(req, res) {
-    // If the user already has an account send them to the metrics page
-    if (req.user) {
-      res.redirect('/metrics');
-      // res.render('metrics');
-    }
-    res.redirect('/');
-  });
+  // app.get('/metrics', function(req, res) {
+  //   // If the user already has an account send them to the members page
+  //   if (req.user) {
+  //     res.redirect('/members');
+  //     return;
+  //     // res.render('index');
+  //   }
+  //   res.sendFile(path.join(__dirname, '../public/assets/login.html'));
+  // });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they
@@ -53,6 +56,8 @@ module.exports = function(app) {
     // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
     res.render('metrics');
   });
+  app.get('/study', isAuthenticated, function(req, res) {
+    // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
+    res.render('study');
+  });
 };
-
-
