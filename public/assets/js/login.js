@@ -13,7 +13,13 @@ $(document).ready(function() {
       password: passwordInput.val().trim(),
     };
 
-    if (!userData.email || !userData.password) {
+    if (!userData.email) {
+      alert('Please enter the email address for your account.');
+      return;
+    }
+
+    if (!userData.password) {
+      alert(`Please enter your account's password.`);
       return;
     }
 
@@ -42,6 +48,7 @@ $(document).ready(function() {
         // If there's an error, log the error
         })
         .catch(function(err) {
+          alert(`Email and password did not match. Please try again.`);
           console.log(err);
         });
   }
