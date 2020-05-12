@@ -2,6 +2,17 @@
 const db = require('../models');
 const passport = require('../config/passport');
 
+const LanguageTranslatorV3 = require('ibm-watson/language-translator/v3');
+const {IamAuthenticator} = require('ibm-watson/auth');
+
+const languageTranslator = new LanguageTranslatorV3({
+  version: '2018-05-01',
+  authenticator: new IamAuthenticator({
+    apikey: 'SfvrtzaNC-VGMaIpgnE32z7ErRU6zUKLhH0MhfnEBkg8',
+  }),
+  url: 'https://api.eu-gb.language-translator.watson.cloud.ibm.com/instances/d4b6215b-805b-43ec-956b-f27f76eaf6f9',
+});
+
 module.exports = function(app) {
   // **************************************
   // START ALL AUTHENTICATION RELATED ROUTES
@@ -69,6 +80,30 @@ module.exports = function(app) {
     db.language.findAll({}).then((data) => {
       res.json(data);
     });
+  });
+
+  app.post('/api/vocab', (req, res)=> {
+    const translateParams = {
+      text: req.body.eng_phrase,
+      modelId: 'en-es',
+    };
+
+    languageTranslator.translate(translateParams)
+        .then((translationResult) => {
+          db.vocab.create({
+            eng_phrase: req.body.eng_phrase,
+            translation: translationResult.result.translations[0].translation,
+            from_id: req.body.from_id,
+            target_id: req.body.target_id,
+            user_id: req.body.user_id,
+          }).then((data)=> {
+            res.json(data);
+          });
+          console.log(JSON.stringify(translationResult, null, 2));
+        })
+        .catch((err) => {
+          console.log('error:', err);
+        });
   });
 
   app.put('api/vocab/:id', (req, res) => {
