@@ -119,7 +119,4 @@ module.exports = function(app) {
     },
     );
   });
-  // **************************************
-  // START ALL VOCAB/LANGUAGE RELATED CALLS
-  // **************************************
 };
