@@ -101,6 +101,10 @@ form.user .form-control-user {
   padding: 0px;
 }
 
+.form-filter {
+  display: contents !important;
+}
+
 .navbar {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
