@@ -46,4 +46,10 @@ $(document).ready(function() {
       });
     });
   });
+
+  // load all the cards for the current user
+  $.get('/api/user_data', async function(data) {
+    const id = await data.id;
+    console.log(id);
+  });
 });

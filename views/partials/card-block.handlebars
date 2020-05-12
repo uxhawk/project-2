@@ -1,0 +1,13 @@
+{{#each phrases}}
+  <div class="col-sm-4">
+    <div class="card mb-3">
+      <div class="d-flex card-header bg-transparent justify-content-end">
+        <i class="far fa-trash-alt text-danger"></i>
+      </div>
+      <div class="card-body text-center">
+        <p>{{this.translation}}</p>
+        <p class="mt-4 italics">{{this.orig_phrase}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
