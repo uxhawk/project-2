@@ -29,12 +29,12 @@ require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
 // set up handlebars
-// const exphbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 
-// app.engine('handlebars', exphbs({
-//   defaultLayout: 'main',
-// }));
-// app.set('view engine', 'handlebars');
+app.engine('handlebars', exphbs({
+  defaultLayout: 'main',
+}));
+app.set('view engine', 'handlebars');
 
 // sync sequelize models and then starting the express app
 db.sequelize.sync({
