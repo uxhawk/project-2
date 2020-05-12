@@ -84,15 +84,17 @@ module.exports = function(app) {
 
   app.post('/api/vocab', (req, res)=> {
     const translateParams = {
-      text: req.body.eng_phrase,
+      text: req.body.orig_phrase,
       modelId: `${req.body.lang_from}-${req.body.lang_to}`,
     };
 
     languageTranslator.translate(translateParams)
         .then((translationResult) => {
           db.vocab.create({
-            eng_phrase: req.body.eng_phrase,
+            orig_phrase: req.body.orig_phrase,
             translation: translationResult.result.translations[0].translation,
+            word_count: translationResult.result.word_count,
+            character_count: translationResult.result.character_count,
             from_id: req.body.from_id,
             target_id: req.body.target_id,
             user_id: req.body.user_id,

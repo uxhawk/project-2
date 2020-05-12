@@ -13,6 +13,7 @@ $(document).ready(function() {
     };
   });
 
+  // select the language values from the select boxes
   let langFrom;
   let langTo;
   $('select.ibm-lang').change(function() {
@@ -28,8 +29,7 @@ $(document).ready(function() {
     $.get('/api/user_data', async function(data) {
       const id = await data.id;
       const translation = {
-        eng_phrase: $('#translation-input').val().trim(),
-        translation: $('#translation-input').val().trim(),
+        orig_phrase: $('#translation-input').val().trim(),
         from_id: 1,
         target_id: 2,
         user_id: id,
