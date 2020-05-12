@@ -4,8 +4,18 @@ $(document).ready(function() {
     $('.animated-icon2').toggleClass('open');
   });
 
+  // $('#translation-input').on('change', function() {
+  //   if ($('#translation-input').val() === '') {
+  //     $('#translate-btn').prop('disabled', true);
+  //   } else {
+  //     $('#translate-btn').prop('disabled', false);
+  //   };
+  // });
+
   $('#translate-btn').click(function(event) {
     event.preventDefault();
+    $('#translate-from').attr('lang'),
+
     $.get('/api/user_data', async function(data) {
       const id = await data.id;
       const translation = {
