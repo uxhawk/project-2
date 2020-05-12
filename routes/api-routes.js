@@ -85,7 +85,7 @@ module.exports = function(app) {
   app.post('/api/vocab', (req, res)=> {
     const translateParams = {
       text: req.body.eng_phrase,
-      modelId: 'en-es',
+      modelId: `${req.body.lang_from}-${req.body.lang_to}`,
     };
 
     languageTranslator.translate(translateParams)
