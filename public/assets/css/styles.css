@@ -91,12 +91,12 @@ form.user .form-control-user {
 
 .btn-round {
   border-radius: 10rem;
-  font-size:1.1rem;
+  font-size:1rem;
   height: 40px;
 }
 
 .form-control::placeholder {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 0px;
   padding: 0px;
 }
