@@ -13,36 +13,25 @@ $(document).ready(function() {
     };
   });
 
-  // select the language values from the select boxes
-  let langFrom;
-  let langTo;
-  $('select.ibm-lang').change(function() {
-    langFrom = $('#translate-from').find('option:selected').attr('lang');
-    langTo = $('#translate-to').find('option:selected').attr('lang');
-    console.log(langFrom, langTo);
-  });
-
   $('#translate-btn').click(function(event) {
     event.preventDefault();
-    console.log($('#translate-from').attr('lang'));
 
     $.get('/api/user_data', async function(data) {
-      const id = await data.id;
       const translation = {
         orig_phrase: $('#translation-input').val().trim(),
         from_id: 1,
         target_id: 2,
-        user_id: id,
-        lang_from: langFrom,
-        lang_to: langTo,
+        lang_from: $('#translate-from').find('option:selected').attr('lang'),
+        lang_to: $('#translate-to').find('option:selected').attr('lang'),
       };
-      // console.log(translation);
       $('#translation-input').val('');
 
       $.ajax({
         method: 'POST',
         url: '/api/vocab',
         data: translation,
+      }).then(()=> {
+        location.reload();
       });
     });
   });
