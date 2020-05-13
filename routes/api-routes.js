@@ -71,7 +71,11 @@ module.exports = function(app) {
   // START ALL VOCAB/LANGUAGE RELATED CALLS
   // **************************************
   app.get('/api/vocab', (req, res) => {
-    db.vocab.findAll({}).then((data) => {
+    db.vocab.findAll({
+      where: {
+        user_id: req.user.id,
+      },
+    }).then((data) => {
       res.json(data);
     });
   });
