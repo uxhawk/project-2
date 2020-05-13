@@ -97,13 +97,14 @@ module.exports = function(app) {
             character_count: translationResult.result.character_count,
             from_id: req.body.from_id,
             target_id: req.body.target_id,
-            user_id: req.body.user_id,
+            user_id: req.user.id,
           }).then((data)=> {
             res.json(data);
           });
           console.log(JSON.stringify(translationResult, null, 2));
         })
         .catch((err) => {
+          console.log('*************THIS IS THE ERROR**************');
           console.log('error:', err);
         });
   });

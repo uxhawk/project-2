@@ -46,7 +46,8 @@ module.exports = function(app) {
         user_id: req.user.id,
       }}).then((data) =>{
       data.forEach((row) =>{
-        let current = {
+        const current = {
+          id: row.id,
           orig_phrase: row.orig_phrase,
           translation: row.translation,
         };
