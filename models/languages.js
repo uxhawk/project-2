@@ -27,16 +27,5 @@ module.exports = function(sequelize, DataTypes) {
     freezeTableName: true,
   });
 
-  Language.associate = function(models) {
-    // Associating Author with Posts
-    // When an Author is deleted, also delete any associated Posts
-    Language.hasMany(models.vocab, {
-      onDelete: 'cascade',
-      // foreignKey: {
-      //   name: 'from_id',
-      // },
-    });
-  };
-
   return Language;
 };

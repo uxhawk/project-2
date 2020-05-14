@@ -30,20 +30,6 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
-    from_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
-    },
-    target_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      validate: {
-        len: [1],
-      },
-    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -61,9 +47,10 @@ module.exports = function(sequelize, DataTypes) {
     // A Post can't be created without an
     // Author due to the foreign key constraint
     Vocab.belongsTo(models.language, {
-      foreigKey: {
-        fieldName: 'fromId',
-      },
+      foreignKey: 'from_id',
+    });
+    Vocab.belongsTo(models.language, {
+      foreignKey: 'target_id',
     });
   };
 
