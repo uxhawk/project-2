@@ -71,18 +71,16 @@ module.exports = function(app) {
             id: row.id,
             orig_phrase: row.orig_phrase,
             translation: row.translation,
+            lang: row.language.lang,
           };
           userPhrases.push(current);
-          // const curLang = {
-          //   lang: row.language.lang,
-          // };
-          userLanguages.push(row.language.lang);
         });
-        const uniqueItems = Array.from(new Set(userLanguages));
+
+        // const uniqueItems = Array.from(new Set(userLanguages));
         res.render('index', {
           phrases: userPhrases,
           languages: appLanguages,
-          userLanguages: uniqueItems,
+          // userLanguages: userLanguages,
         });
       });
     } catch (error) {

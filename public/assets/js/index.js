@@ -73,6 +73,7 @@ $(document).ready(function() {
     url: '/api/vocab',
   }).then((data) => {
     vocab = data;
+    console.log(vocab);
   });
 
   // const hasChart = $('body').has('canvas');
@@ -158,18 +159,20 @@ $(document).ready(function() {
     );
   });
 
+
   // filter interactions in the word bank
   let filtered;
-  $('#bank-filter').change(function() {
+  $(document).on('change', '#bank-filter', function() {
     filtered = [];
     $('#sort-control').val('');
     // eslint-disable-next-line no-invalid-this
     if ($(this).val() !== 'All Languages') {
       vocab.forEach((phrase)=> {
-        if (phrase.language.lang === $('#bank-filter').val()) {
+        if (phrase.target_id == $('#bank-filter option:selected').attr('data-id')) {
           filtered.push(phrase);
         }
       });
+
       $('#all-cards').empty();
       filtered.forEach((phrase) => {
         printCard(phrase);
@@ -273,10 +276,11 @@ $(document).ready(function() {
     const card = `<div class="col-sm-4">
     <div class="card mb-3">
       <div class="d-flex card-header bg-transparent justify-content-end">
-        <i class="far fa-trash-alt text-danger" data-id="${arr.id}"></i>
-      </div>
+      <i class="far
+      fa-trash-alt text-danger"data-id="${arr.id}"></i>
+    </div>
       <div class="card-body text-center">
-        <p>${arr.translation}</p>
+        <h4>${arr.translation}</h4>
         <p class="mt-4 italics">${arr.orig_phrase}</p>
       </div>
     </div>

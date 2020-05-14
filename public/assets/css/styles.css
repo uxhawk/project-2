@@ -87,6 +87,7 @@ form.user .form-control-user {
   border-radius: 10rem;
   font-size:1rem;
   height: 40px;
+  cursor: pointer;
 }
 
 .form-control::placeholder {
