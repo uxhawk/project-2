@@ -134,6 +134,7 @@ $(document).ready(function() {
     // button to exit
   });
 
+  // delete route to remove a card
   $('.fa-trash-alt').click(function() {
     // eslint-disable-next-line no-invalid-this
     const delId = $(this).attr('data-id');
@@ -147,5 +148,19 @@ $(document).ready(function() {
           location.reload();
         },
     );
+  });
+
+  // filter interactions in the word bank
+  $('#bank-filter').change(function() {
+    // eslint-disable-next-line no-invalid-this
+    if ($(this).val() !== 'Select Language') {
+      const filtered = [];
+      vocab.forEach((phrase)=> {
+        if (phrase.language.lang === $('#bank-filter').val()) {
+          filtered.push(phrase);
+        }
+      });
+      console.log(filtered);
+    }
   });
 });

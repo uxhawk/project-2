@@ -40,7 +40,8 @@ module.exports = function(app) {
   // will be redirected to the signup page
   app.get('/members', isAuthenticated, function(req, res) {
     const userPhrases = [];
-    const languages = [];
+    const appLanguages = [];
+    const userLanguages = [];
 
     try {
       db.language.findAll({}).then((data) => {
@@ -50,7 +51,7 @@ module.exports = function(app) {
             lang_code: row.lang_code,
             lang: row.lang,
           };
-          languages.push(currentRow);
+          appLanguages.push(currentRow);
         });
       });
     } catch (error) {
@@ -72,10 +73,16 @@ module.exports = function(app) {
             translation: row.translation,
           };
           userPhrases.push(current);
+          // const curLang = {
+          //   lang: row.language.lang,
+          // };
+          userLanguages.push(row.language.lang);
         });
+        const uniqueItems = Array.from(new Set(userLanguages));
         res.render('index', {
           phrases: userPhrases,
-          languages: languages,
+          languages: appLanguages,
+          userLanguages: uniqueItems,
         });
       });
     } catch (error) {

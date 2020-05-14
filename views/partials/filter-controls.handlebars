@@ -6,14 +6,8 @@
                 <label for="translate-from flex-nowrap" style="
                 display: contents;
             "><i class="fas fa-filter pr-2 text-white"></i><span class="text-white pr-2">Filter:</span></label>
-                {{!-- <select class="form-control" id="translate-from">
-                  <option lang="en">English</option>
-                  <option lang="it">Italian</option>
-                  <option lang="es">Spanish</option>
-                  <option lang="fr">French</option>
-                </select> --}}
                 <select class="form-control" id="bank-filter">
-                  {{> language-selector }}
+                  {{> user-languages-filter }}
                 </select>
               </div>
               <div class="form-inline justify-content-end flex-nowrap pl-4">
