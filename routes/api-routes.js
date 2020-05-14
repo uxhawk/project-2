@@ -75,6 +75,7 @@ module.exports = function(app) {
       where: {
         user_id: req.user.id,
       },
+      include: [db.language],
     }).then((data) => {
       res.json(data);
     });

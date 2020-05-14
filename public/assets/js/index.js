@@ -40,7 +40,6 @@ $(document).ready(function() {
         target_id: toId,
         lang_from: fromLangCode,
         lang_to: toLangCode,
-        user_id: req.user.id,
       };
       $('#translation-input').val('');
 
@@ -117,8 +116,8 @@ $(document).ready(function() {
   $('#study-start').click(function() {
     // randomly pick a card from the vocab array
     const randomCard = vocab[Math.floor(Math.random()*vocab.length)];
-    console.log(randomCard);
     $('#study-card').empty();
+    $('#random-phrase').text('');
     // print the contents of that card into the study-card body
     const par = $('<p>');
     par.text(randomCard.translation);

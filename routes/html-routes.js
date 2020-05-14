@@ -62,8 +62,10 @@ module.exports = function(app) {
         where: {
           user_id: req.user.id,
         },
+        include: [db.language],
         order: [['createdAt', 'DESC']],
       }).then((data) =>{
+        console.log(data);
         data.forEach((row) =>{
           const current = {
             id: row.id,

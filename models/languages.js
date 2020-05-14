@@ -28,8 +28,8 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Language.associate = function(models) {
-    // Associating language with vocab
-    // When an language is deleted, also delete any associated vocab
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
     Language.hasMany(models.vocab, {
       onDelete: 'cascade',
     });
