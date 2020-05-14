@@ -49,7 +49,19 @@ $(document).ready(function() {
         url: '/api/vocab',
         data: translation,
       }).then((data)=> {
-        location.reload();
+        const alert = `<div class="alert alert-success w-50 position-absolute 
+        text-center success-message" role="alert" style=" z-index: 1; left: 0;
+        right: 0; margin: auto;
+        top: 50%;">Success!</div>`;
+        $('body').append(alert);
+        $('#translate-btn').html(`Translate`);
+
+        vocab.push(data);
+        newestFirst(vocab);
+        $('#all-cards').empty();
+        vocab.forEach((phrase) => {
+          printCard(phrase);
+        });
       });
     });
   });
@@ -61,7 +73,6 @@ $(document).ready(function() {
     url: '/api/vocab',
   }).then((data) => {
     vocab = data;
-    console.log(vocab);
   });
 
   // const hasChart = $('body').has('canvas');
@@ -148,8 +159,10 @@ $(document).ready(function() {
   });
 
   // filter interactions in the word bank
-  const filtered = [];
+  let filtered;
   $('#bank-filter').change(function() {
+    filtered = [];
+    $('#sort-control').val('');
     // eslint-disable-next-line no-invalid-this
     if ($(this).val() !== 'All Languages') {
       vocab.forEach((phrase)=> {
