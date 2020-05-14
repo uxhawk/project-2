@@ -153,7 +153,7 @@ $(document).ready(function() {
   // filter interactions in the word bank
   $('#bank-filter').change(function() {
     // eslint-disable-next-line no-invalid-this
-    if ($(this).val() !== 'Select Language') {
+    if ($(this).val() !== 'All Languages') {
       const filtered = [];
       vocab.forEach((phrase)=> {
         if (phrase.language.lang === $('#bank-filter').val()) {
@@ -162,6 +162,21 @@ $(document).ready(function() {
       });
       $('#all-cards').empty();
       filtered.forEach((phrase) => {
+        const card = `  <div class="col-sm-4">
+        <div class="card mb-3">
+          <div class="d-flex card-header bg-transparent justify-content-end">
+            <i class="far fa-trash-alt text-danger" data-id="${phrase.id}"></i>
+          </div>
+          <div class="card-body text-center">
+            <p>${phrase.translation}</p>
+            <p class="mt-4 italics">${phrase.orig_phrase}</p>
+          </div>
+        </div>
+      </div>`;
+        $('#all-cards').append(card);
+      });
+    } else {
+      vocab.forEach((phrase) => {
         const card = `  <div class="col-sm-4">
         <div class="card mb-3">
           <div class="d-flex card-header bg-transparent justify-content-end">
