@@ -26,5 +26,14 @@ module.exports = function(sequelize, DataTypes) {
   {
     freezeTableName: true,
   });
+
+  Language.associate = function(models) {
+    // Associating language with vocab
+    // When an language is deleted, also delete any associated vocab
+    Language.hasMany(models.vocab, {
+      onDelete: 'cascade',
+    });
+  };
+
   return Language;
 };

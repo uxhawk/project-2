@@ -55,5 +55,13 @@ module.exports = function(sequelize, DataTypes) {
   {
     freezeTableName: true,
   });
+
+  Vocab.associate = function(models) {
+    Vocab.belongsTo(models.language, {
+      foreignKey: {
+        allowNull: false,
+      },
+    });
+  };
   return Vocab;
 };

@@ -15,8 +15,6 @@ $(document).ready(function() {
 
   // on click on translate btn store form values
   // in object and post to DB
-
-
   $('#translate-btn').click(function(event) {
     event.preventDefault();
     $('#translate-btn').prop('disabled', true);
@@ -29,6 +27,7 @@ $(document).ready(function() {
     const fromId = $('#translate-from').find('option:selected').attr('id');
     const toId = $('#translate-to').find('option:selected').attr('id');
 
+    // prevent submit if the to/from languages are the same
     if (fromLangCode === toLangCode) {
       alert('Please select two different languages for the translation.');
       return;
@@ -41,6 +40,7 @@ $(document).ready(function() {
         target_id: toId,
         lang_from: fromLangCode,
         lang_to: toLangCode,
+        user_id: req.user.id,
       };
       $('#translation-input').val('');
 
@@ -52,5 +52,83 @@ $(document).ready(function() {
         location.reload();
       });
     });
+  });
+
+  let vocab = [];
+  // get all data for sort/filter function
+  $.ajax({
+    method: 'GET',
+    url: '/api/vocab',
+  }).then((data) => {
+    vocab = data;
+    console.log(vocab);
+  });
+
+  // const hasChart = $('body').has('canvas');
+  // $('#myChart').hide();
+  // if (hasChart.length !==0) {
+  //   // ajax call to get details about all details in the person's db
+
+  //   $.ajax({
+  //     method: 'GET',
+  //     url: '/api/vocab/details',
+  //   }).then((data) =>{
+  //     const phrases = data.filter((row) => row.target_id = 2);
+  //     const phraseChars = [];
+  //     phrases.forEach((row) => {
+  //       phraseChars.push(row.word_count);
+  //     });
+  //     const labels = [];
+  //     phrases.forEach((row) => {
+  //       labels.push(row.translation);
+  //     });
+
+
+  //     const ctx = document.getElementById('myChart').getContext('2d');
+  //     // eslint-disable-next-line no-unused-vars
+  //     const chart = new Chart(ctx, {
+  //       // The type of chart we want to create
+  //       type: 'line',
+
+  //       // The data for our dataset
+  //       data: {
+  //         labels: labels,
+  //         datasets: [{
+  //           fill: false,
+  //           borderColor: 'rgb(255, 99, 132)',
+  //           data: phraseChars,
+  //         }],
+  //       },
+
+  //       // Configuration options go here
+  //       options: {
+  //         elements: {
+  //           line: {
+  //             fill: false,
+  //           },
+  //         },
+  //       },
+  //     });
+  //   });
+  //   $('#myChart').show();
+  // }
+
+  // functions for study mode
+  $('#study-start').click(function() {
+    // randomly pick a card from the vocab array
+    const randomCard = vocab[Math.floor(Math.random()*vocab.length)];
+    console.log(randomCard);
+    $('#study-card').empty();
+    // print the contents of that card into the study-card body
+    const par = $('<p>');
+    par.text(randomCard.translation);
+    $('#study-card').append(par);
+    // button to show translation
+
+    $('#randomPhrase').text(randomCard.orig_phrase);
+
+    // button to show next card
+
+    // button to exit
   });
 });

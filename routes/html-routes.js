@@ -91,3 +91,14 @@ module.exports = function(app) {
     res.render('study');
   });
 };
+
+// ajax.get() words in this user's DB and return that as JSON, and save to a local array
+
+// SORTING FUNCTION
+// on select value change, clear out the wordbank
+// jquery.empty()
+
+// perform function on the local array - alphabetize / arrange
+
+// display and print out the cards into the empty wordbank section
+

@@ -80,6 +80,17 @@ module.exports = function(app) {
     });
   });
 
+  app.get('/api/vocab/details', (req, res) => {
+    db.vocab.findAll({
+      where: {
+        user_id: req.user.id,
+      },
+      order: [['orig_phrase', 'ASC']],
+    }).then((data)=> {
+      res.json(data);
+    });
+  });
+
   app.get('/api/languages', (req, res) => {
     db.language.findAll({}).then((data) => {
       res.json(data);
@@ -108,7 +119,6 @@ module.exports = function(app) {
           console.log(JSON.stringify(translationResult, null, 2));
         })
         .catch((err) => {
-          console.log('*************THIS IS THE ERROR**************');
           console.log('error:', err);
         });
   });
