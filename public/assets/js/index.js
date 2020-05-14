@@ -1,3 +1,4 @@
+/* eslint-disable no-invalid-this */
 $(document).ready(function() {
   // animation of the menu bars
   $('.second-button').on('click', function() {
@@ -121,23 +122,19 @@ $(document).ready(function() {
     $('#collapseExample').collapse('hide');
     $('#study-card').empty();
     $('#random-phrase').text('');
+
     // print the contents of that card into the study-card body
     const par = $('<p>');
     par.text(randomCard.translation);
     $('#study-card').append(par);
-    // button to show translation
-
     $('#randomPhrase').text(randomCard.orig_phrase);
-
-    // button to show next card
-
-    // button to exit
   });
 
   // delete route to remove a card
-  $('.fa-trash-alt').click(function() {
+  $(document).on('click', 'i.fa-trash-alt', function() {
     // eslint-disable-next-line no-invalid-this
     const delId = $(this).attr('data-id');
+    console.log(delId);
 
     // Send the DELETE request.
     $.ajax('/api/vocab/'+ delId, {
@@ -151,10 +148,10 @@ $(document).ready(function() {
   });
 
   // filter interactions in the word bank
+  const filtered = [];
   $('#bank-filter').change(function() {
     // eslint-disable-next-line no-invalid-this
     if ($(this).val() !== 'All Languages') {
-      const filtered = [];
       vocab.forEach((phrase)=> {
         if (phrase.language.lang === $('#bank-filter').val()) {
           filtered.push(phrase);
@@ -162,34 +159,115 @@ $(document).ready(function() {
       });
       $('#all-cards').empty();
       filtered.forEach((phrase) => {
-        const card = `  <div class="col-sm-4">
-        <div class="card mb-3">
-          <div class="d-flex card-header bg-transparent justify-content-end">
-            <i class="far fa-trash-alt text-danger" data-id="${phrase.id}"></i>
-          </div>
-          <div class="card-body text-center">
-            <p>${phrase.translation}</p>
-            <p class="mt-4 italics">${phrase.orig_phrase}</p>
-          </div>
-        </div>
-      </div>`;
-        $('#all-cards').append(card);
+        printCard(phrase);
       });
     } else {
       vocab.forEach((phrase) => {
-        const card = `  <div class="col-sm-4">
-        <div class="card mb-3">
-          <div class="d-flex card-header bg-transparent justify-content-end">
-            <i class="far fa-trash-alt text-danger" data-id="${phrase.id}"></i>
-          </div>
-          <div class="card-body text-center">
-            <p>${phrase.translation}</p>
-            <p class="mt-4 italics">${phrase.orig_phrase}</p>
-          </div>
-        </div>
-      </div>`;
-        $('#all-cards').append(card);
+        printCard(phrase);
       });
     }
   });
+
+  // sort interactions in the word bank
+  $('#sort-control').change(function() {
+    if ($('#sort-control').val()==='') {
+      return;
+    }
+
+    let currentArr =[];
+    if ($('#bank-filter').val() === 'All Languages') {
+      currentArr = vocab;
+    } else {
+      currentArr = filtered;
+    }
+
+    if ($(this).val() === 'A-Z') {
+      sortAZ(currentArr);
+      $('#all-cards').empty();
+      currentArr.forEach((phrase) => {
+        printCard(phrase);
+      });
+    } else if ($(this).val() === 'Z-A') {
+      sortZA(currentArr);
+      $('#all-cards').empty();
+      currentArr.forEach((phrase) => {
+        printCard(phrase);
+      });
+    } else if ($(this).val() === 'Newest First') {
+      newestFirst(currentArr);
+      $('#all-cards').empty();
+      currentArr.forEach((phrase) => {
+        printCard(phrase);
+      });
+    } else if ($(this).val() === 'Oldest First') {
+      oldestFirst(currentArr);
+      $('#all-cards').empty();
+      currentArr.forEach((phrase) => {
+        printCard(phrase);
+      });
+    }
+  });
+
+  /**
+ * function to print out cards to the dom
+ * @param {arr} arr - The input array that should have the user's vocab
+ * @return {Array} returns the updated sorted array for later updates
+ */
+  function sortAZ(arr) {
+    arr.sort((a, b) => (a.translation > b.translation) ?
+    1 : ((b.translation > a.translation) ? -1 : 0));
+    return arr;
+  }
+
+  /**
+ * function to print out cards to the dom
+ * @param {arr} arr - The input array that should have the user's vocab
+ * @return {Array} returns the updated sorted array for later updates
+ */
+  function sortZA(arr) {
+    arr.sort((a, b) => (b.translation > a.translation) ?
+    1 : ((a.translation > b.translation) ? -1 : 0));
+    return arr;
+  }
+
+  /**
+ * function to print out cards to the dom
+ * @param {arr} arr - The input array that should have the user's vocab
+ * @return {Array} returns the updated sorted array for later updates
+ */
+  function oldestFirst(arr) {
+    arr.sort((a, b) => (a.createdAt > b.createdAt) ?
+    1 : ((b.createdAt > a.createdAt) ? -1 : 0));
+    return arr;
+  }
+
+  /**
+ * function to print out cards to the dom
+ * @param {arr} arr - The input array that should have the user's vocab
+ * @return {Array} returns the updated sorted array for later updates
+ */
+  function newestFirst(arr) {
+    arr.sort((a, b) => (b.createdAt > a.createdAt) ?
+    1 : ((a.createdAt > b.createdAt) ? -1 : 0));
+    return arr;
+  }
+
+  /**
+ * function to print out cards to the dom
+ * @param {arr} arr - The input array that should have the user's vocab
+ */
+  function printCard(arr) {
+    const card = `<div class="col-sm-4">
+    <div class="card mb-3">
+      <div class="d-flex card-header bg-transparent justify-content-end">
+        <i class="far fa-trash-alt text-danger" data-id="${arr.id}"></i>
+      </div>
+      <div class="card-body text-center">
+        <p>${arr.translation}</p>
+        <p class="mt-4 italics">${arr.orig_phrase}</p>
+      </div>
+    </div>
+  </div>`;
+    $('#all-cards').append(card);
+  }
 });
