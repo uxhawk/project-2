@@ -93,7 +93,8 @@ module.exports = function(app) {
   });
 };
 
-// ajax.get() words in this user's DB and return that as JSON, and save to a local array
+// ajax.get() words in this user's
+// DB and return that as JSON, and save to a local array
 
 // SORTING FUNCTION
 // on select value change, clear out the wordbank

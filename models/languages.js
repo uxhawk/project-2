@@ -32,6 +32,9 @@ module.exports = function(sequelize, DataTypes) {
     // When an Author is deleted, also delete any associated Posts
     Language.hasMany(models.vocab, {
       onDelete: 'cascade',
+      // foreignKey: {
+      //   name: 'from_id',
+      // },
     });
   };
 
