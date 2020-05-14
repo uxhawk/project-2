@@ -133,4 +133,19 @@ $(document).ready(function() {
 
     // button to exit
   });
+
+  $('.fa-trash-alt').click(function() {
+    // eslint-disable-next-line no-invalid-this
+    const delId = $(this).attr('data-id');
+
+    // Send the DELETE request.
+    $.ajax('/api/vocab/'+ delId, {
+      type: 'DELETE',
+    }).then(
+        function() {
+          // Reload the page to get the updated list
+          location.reload();
+        },
+    );
+  });
 });

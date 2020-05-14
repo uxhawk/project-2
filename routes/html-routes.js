@@ -65,7 +65,6 @@ module.exports = function(app) {
         include: [db.language],
         order: [['createdAt', 'DESC']],
       }).then((data) =>{
-        console.log(data);
         data.forEach((row) =>{
           const current = {
             id: row.id,

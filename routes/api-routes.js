@@ -117,7 +117,7 @@ module.exports = function(app) {
           }).then((data)=> {
             res.json(data);
           });
-          console.log(JSON.stringify(translationResult, null, 2));
+          // console.log(JSON.stringify(translationResult, null, 2));
         })
         .catch((err) => {
           console.log('error:', err);
@@ -134,5 +134,16 @@ module.exports = function(app) {
       },
     },
     );
+  });
+
+  app.delete('/api/vocab/:id', function(req, res) {
+    // We just have to specify which todo we want to destroy with "where"
+    db.vocab.destroy({
+      where: {
+        id: req.params.id,
+      },
+    }).then(function(data) {
+      res.json(data);
+    });
   });
 };
