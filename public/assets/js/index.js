@@ -160,7 +160,21 @@ $(document).ready(function() {
           filtered.push(phrase);
         }
       });
-      console.log(filtered);
+      $('#all-cards').empty();
+      filtered.forEach((phrase) => {
+        const card = `  <div class="col-sm-4">
+        <div class="card mb-3">
+          <div class="d-flex card-header bg-transparent justify-content-end">
+            <i class="far fa-trash-alt text-danger" data-id="${phrase.id}"></i>
+          </div>
+          <div class="card-body text-center">
+            <p>${phrase.translation}</p>
+            <p class="mt-4 italics">${phrase.orig_phrase}</p>
+          </div>
+        </div>
+      </div>`;
+        $('#all-cards').append(card);
+      });
     }
   });
 });
