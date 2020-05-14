@@ -113,9 +113,12 @@ $(document).ready(function() {
   // }
 
   // functions for study mode
+  $('#show-translation').hide();
   $('#study-start').click(function() {
     // randomly pick a card from the vocab array
     const randomCard = vocab[Math.floor(Math.random()*vocab.length)];
+    $('#show-translation').show();
+    $('#collapseExample').collapse('hide');
     $('#study-card').empty();
     $('#random-phrase').text('');
     // print the contents of that card into the study-card body
