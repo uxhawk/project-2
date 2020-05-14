@@ -39,23 +39,48 @@ module.exports = function(app) {
   // If a user who is not logged in tries to access this route they
   // will be redirected to the signup page
   app.get('/members', isAuthenticated, function(req, res) {
-    // get the user id for the authenticated user
     const userPhrases = [];
-    db.vocab.findAll({
-      where: {
-        user_id: req.user.id,
-      }}).then((data) =>{
-      data.forEach((row) =>{
-        const current = {
-          id: row.id,
-          orig_phrase: row.orig_phrase,
-          translation: row.translation,
-        };
-        userPhrases.push(current);
+    const languages = [];
+
+    try {
+      db.language.findAll({}).then((data) => {
+        data.forEach((row) => {
+          const currentRow = {
+            id: row.id,
+            lang_code: row.lang_code,
+            lang: row.lang,
+          };
+          languages.push(currentRow);
+        });
       });
-      console.log(userPhrases);
-      res.render('index', {phrases: userPhrases});
-    });
+    } catch (error) {
+      throw error;
+    }
+
+    try {
+      db.vocab.findAll({
+        where: {
+          user_id: req.user.id,
+        },
+        include: [db.language],
+        order: [['createdAt', 'DESC']],
+      }).then((data) =>{
+        data.forEach((row) =>{
+          const current = {
+            id: row.id,
+            orig_phrase: row.orig_phrase,
+            translation: row.translation,
+          };
+          userPhrases.push(current);
+        });
+        res.render('index', {
+          phrases: userPhrases,
+          languages: languages,
+        });
+      });
+    } catch (error) {
+      throw error;
+    }
   });
 
   app.get('/metrics', isAuthenticated, function(req, res) {
@@ -67,3 +92,15 @@ module.exports = function(app) {
     res.render('study');
   });
 };
+
+// ajax.get() words in this user's
+// DB and return that as JSON, and save to a local array
+
+// SORTING FUNCTION
+// on select value change, clear out the wordbank
+// jquery.empty()
+
+// perform function on the local array - alphabetize / arrange
+
+// display and print out the cards into the empty wordbank section
+

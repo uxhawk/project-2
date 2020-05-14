@@ -1,43 +1,37 @@
-      <section class="row mt-4 pt-4 mx-2">
-        <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
-          <div class="card">
-            <div class="card-body">
-              <div class="text-center">
-                <h2>New Translation</h2>
-              </div>
-              <form class="user" action="">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="translate-from"><p>Translate From</p></label>
-                      <select class="form-control ibm-lang" id="translate-from">
-                        <option lang="en">English</option>
-                        <option lang="it">Italian</option>
-                        <option lang="es">Spanish</option>
-                        <option lang="fr">French</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="col-sm-6">
-                    <div class="form-group">
-                      <label for="translate-to" ><p >Translate To</p></label>
-                      <select class="form-control ibm-lang" id="translate-to">
-                        <option lang="it">Italian</option>
-                        <option lang="en">English</option>
-                        <option lang="es">Spanish</option>
-                        <option lang="fr">French</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-12">
-                    <textarea class="form-control mb-2 translation" id="translation-input" rows="3" name="tranlation"></textarea>
-                  </div>
-                </div>
-                <button id="translate-btn" type="submit" class=" mt-3 btn btn-primary btn-user btn-block btn-round" disabled>Translate</button>
-              </form>
-            </div>
+  <section class="row mt-4 pt-4 mx-2">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h2>New Translation</h2>
           </div>
+          <form class="user" action="">
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="translate-from"><p>Translate From</p></label>
+                  <select class="form-control" id="translate-from">
+                  {{> language-selector }}
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label for="translate-to" ><p >Translate To</p></label>
+                  <select class="form-control" id="translate-to">
+                  {{> language-selector }}
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                <textarea class="form-control mb-2 translation" id="translation-input" rows="3" name="tranlation"></textarea>
+              </div>
+            </div>
+            <button id="translate-btn" type="submit" class=" mt-3 btn btn-primary btn-user btn-block btn-round" disabled>Translate</button>
+          </form>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>

@@ -1,5 +1,28 @@
 {{> nav-block}}
 
-<h1>This is the study mode page</h1>
+  <section class="row mt-4 pt-4 mx-2">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3">
+      <div class="card">
+        <div class="card-body">
+          <div class="text-center">
+            <h2>Study Mode</h2>
+            <p>Test your knowledge of vocab and phrases.</p>
+            <div id="study-card" class="my-3">
+
+            </div>
+            <div id="translation">
+              <div class="collapse" id="collapseExample">
+                <p><span id="randomPhrase" class="mb-3"></span></p>
+              </div>
+              <button class="btn btn-info mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="show-translation">
+                  Show Translation
+                </button>
+            </div>
+            <button class="btn btn-primary" id="study-start">Generate Random Word</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 {{> script-block}}
