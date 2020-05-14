@@ -168,7 +168,8 @@ $(document).ready(function() {
     // eslint-disable-next-line no-invalid-this
     if ($(this).val() !== 'All Languages') {
       vocab.forEach((phrase)=> {
-        if (phrase.target_id == $('#bank-filter option:selected').attr('data-id')) {
+        if (phrase.target_id == $('#bank-filter option:selected').
+            attr('data-id')) {
           filtered.push(phrase);
         }
       });
