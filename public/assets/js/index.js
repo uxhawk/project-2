@@ -230,7 +230,6 @@ $(document).ready(function() {
 
       if (filtered.length === 0 &&
         $('#study-language option:selected').val() !== 'select-language') {
-
         $('#study-start').prop('disabled', true);
         $('.card-body').prepend(`<div id="lang-alert" 
         class="alert alert-warning" role="alert">
@@ -261,7 +260,6 @@ $(document).ready(function() {
     par.text(randomCard.translation);
     $('#randomPhrase').text(randomCard.orig_phrase);
     $('#study-card').append(par);
-   
   });
 
   /**
