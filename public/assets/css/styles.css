@@ -90,6 +90,10 @@ form.user .form-control-user {
   cursor: pointer;
 }
 
+i {
+  cursor: pointer;
+}
+
 .form-control::placeholder {
   font-size: 1rem;
   margin: 0px;

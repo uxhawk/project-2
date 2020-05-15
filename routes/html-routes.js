@@ -41,7 +41,7 @@ module.exports = function(app) {
   app.get('/members', isAuthenticated, function(req, res) {
     const userPhrases = [];
     const appLanguages = [];
-    const userLanguages = [];
+    // const userLanguages = [];
 
     try {
       db.language.findAll({}).then((data) => {
@@ -66,12 +66,13 @@ module.exports = function(app) {
         include: [db.language],
         order: [['createdAt', 'DESC']],
       }).then((data) =>{
+        console.log(data[0]);
         data.forEach((row) =>{
           const current = {
             id: row.id,
             orig_phrase: row.orig_phrase,
             translation: row.translation,
-            lang: row.language.lang,
+            // language: row.language.lang,
           };
           userPhrases.push(current);
         });
@@ -89,23 +90,9 @@ module.exports = function(app) {
   });
 
   app.get('/metrics', isAuthenticated, function(req, res) {
-    // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
     res.render('metrics');
   });
   app.get('/study', isAuthenticated, function(req, res) {
-    // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
     res.render('study');
   });
 };
-
-// ajax.get() words in this user's
-// DB and return that as JSON, and save to a local array
-
-// SORTING FUNCTION
-// on select value change, clear out the wordbank
-// jquery.empty()
-
-// perform function on the local array - alphabetize / arrange
-
-// display and print out the cards into the empty wordbank section
-

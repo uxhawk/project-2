@@ -25,8 +25,8 @@ $(document).ready(function() {
     const fromLangCode = $('#translate-from')
         .find('option:selected').attr('lang');
     const toLangCode = $('#translate-to').find('option:selected').attr('lang');
-    const fromId = $('#translate-from').find('option:selected').attr('id');
-    const toId = $('#translate-to').find('option:selected').attr('id');
+    const fromId = $('#translate-from').find('option:selected').attr('data-id');
+    const toId = $('#translate-to').find('option:selected').attr('data-id');
 
     // prevent submit if the to/from languages are the same
     if (fromLangCode === toLangCode) {
@@ -49,12 +49,14 @@ $(document).ready(function() {
         url: '/api/vocab',
         data: translation,
       }).then((data)=> {
-        const alert = `<div class="alert alert-success w-50 position-absolute 
-        text-center success-message" role="alert" style=" z-index: 1; left: 0;
-        right: 0; margin: auto;
-        top: 50%;">Success!</div>`;
-        $('body').append(alert);
-        $('#translate-btn').html(`Translate`);
+        $('#translate-btn').toggleClass('btn-primary')
+            .toggleClass('btn-success').prop('disabled', false)
+            .html('<i class="far fa-check-circle pr-2"></i>Success!');
+        $('#translate-btn').delay(650).queue(function() {
+          $(this).toggleClass('btn-primary')
+              .toggleClass('btn-success').html(`Translate`)
+              .prop('disabled', true);
+        });
 
         vocab.push(data);
         newestFirst(vocab);
@@ -179,6 +181,7 @@ $(document).ready(function() {
         printCard(phrase);
       });
     } else {
+      $('#all-cards').empty();
       vocab.forEach((phrase) => {
         printCard(phrase);
       });
@@ -190,9 +193,8 @@ $(document).ready(function() {
     if ($('#sort-control').val()==='') {
       return;
     }
-
     let currentArr =[];
-    if ($('#bank-filter').val() === 'All Languages') {
+    if ($('#bank-filter').find('option:selected').val() === 'All Languages') {
       currentArr = vocab;
     } else {
       currentArr = filtered;
@@ -276,9 +278,8 @@ $(document).ready(function() {
   function printCard(arr) {
     const card = `<div class="col-sm-4">
     <div class="card mb-3">
-      <div class="d-flex card-header bg-transparent justify-content-end">
-      <i class="far
-      fa-trash-alt text-danger"data-id="${arr.id}"></i>
+      <div class="d-flex card-header bg-transparent justify-content-between">
+      <i class="far fa-trash-alt text-danger"data-id="${arr.id}"></i>
     </div>
       <div class="card-body text-center">
         <h4>${arr.translation}</h4>
