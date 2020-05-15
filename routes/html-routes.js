@@ -40,7 +40,8 @@ module.exports = function(app) {
   // will be redirected to the signup page
   app.get('/members', isAuthenticated, function(req, res) {
     const userPhrases = [];
-    const languages = [];
+    const appLanguages = [];
+    // const userLanguages = [];
 
     try {
       db.language.findAll({}).then((data) => {
@@ -50,7 +51,7 @@ module.exports = function(app) {
             lang_code: row.lang_code,
             lang: row.lang,
           };
-          languages.push(currentRow);
+          appLanguages.push(currentRow);
         });
       });
     } catch (error) {
@@ -65,17 +66,22 @@ module.exports = function(app) {
         include: [db.language],
         order: [['createdAt', 'DESC']],
       }).then((data) =>{
+        console.log(data[0]);
         data.forEach((row) =>{
           const current = {
             id: row.id,
             orig_phrase: row.orig_phrase,
             translation: row.translation,
+            // language: row.language.lang,
           };
           userPhrases.push(current);
         });
+
+        // const uniqueItems = Array.from(new Set(userLanguages));
         res.render('index', {
           phrases: userPhrases,
-          languages: languages,
+          languages: appLanguages,
+          // userLanguages: userLanguages,
         });
       });
     } catch (error) {
@@ -84,23 +90,22 @@ module.exports = function(app) {
   });
 
   app.get('/metrics', isAuthenticated, function(req, res) {
-    // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
     res.render('metrics');
   });
   app.get('/study', isAuthenticated, function(req, res) {
-    // res.sendFile(path.join(__dirname, '../public/assets/members.html'));
-    res.render('study');
+    const appLanguages = [];
+    db.language.findAll({}).then((data) => {
+      data.forEach((row) => {
+        const currentRow = {
+          id: row.id,
+          lang_code: row.lang_code,
+          lang: row.lang,
+        };
+        appLanguages.push(currentRow);
+      });
+      res.render('study', {
+        languages: appLanguages,
+      });
+    });
   });
 };
-
-// ajax.get() words in this user's
-// DB and return that as JSON, and save to a local array
-
-// SORTING FUNCTION
-// on select value change, clear out the wordbank
-// jquery.empty()
-
-// perform function on the local array - alphabetize / arrange
-
-// display and print out the cards into the empty wordbank section
-

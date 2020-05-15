@@ -87,6 +87,11 @@ form.user .form-control-user {
   border-radius: 10rem;
   font-size:1rem;
   height: 40px;
+  cursor: pointer;
+}
+
+i {
+  cursor: pointer;
 }
 
 .form-control::placeholder {
@@ -211,5 +216,14 @@ button {
 }
 #mb-4 {
   color: rosybrown;
+}
 
+.success-message {
+  opacity: 0;
+  animation: fade 2s linear;
+}
+
+@keyframes fade {
+  0%,100% { opacity: 0 }
+  50% { opacity: 1 }
 }

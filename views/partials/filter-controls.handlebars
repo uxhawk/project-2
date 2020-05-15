@@ -3,24 +3,20 @@
           <div class="row">
             <div class="col-md-12 d-flex justify-content-between">
               <div class="form-inline flex-nowrap">
-                <label for="translate-from flex-nowrap" style="
+                <label for="bank-filter" style="
                 display: contents;
             "><i class="fas fa-filter pr-2 text-white"></i><span class="text-white pr-2">Filter:</span></label>
-                {{!-- <select class="form-control" id="translate-from">
-                  <option lang="en">English</option>
-                  <option lang="it">Italian</option>
-                  <option lang="es">Spanish</option>
-                  <option lang="fr">French</option>
-                </select> --}}
                 <select class="form-control" id="bank-filter">
+                  <option value="All Languages">All Languages</option>
                   {{> language-selector }}
                 </select>
               </div>
               <div class="form-inline justify-content-end flex-nowrap pl-4">
-                <label for="translate-from" style="
+                <label for="sort-control" style="
                 display: contents;
             "><p class="text-white pr-2">Sort:</p></label>
-                <select class="form-control" id="translate-from">
+                <select class="form-control" id="sort-control">
+                  <option></option>
                   <option>A-Z</option>
                   <option>Z-A</option>
                   <option>Newest First</option>
