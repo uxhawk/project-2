@@ -7,18 +7,21 @@
           <div class="text-center">
             <h2>Study Mode</h2>
             <p>Test your knowledge of vocab and phrases.</p>
+            <select name="" id="study-language">
+                <option value="select-language">Select Language</option>
+                  {{> language-selector }}
+            </select>
             <div id="study-card" class="my-3">
-
             </div>
-            <div id="translation">
+            <div id="translation-collapse">
               <div class="collapse" id="collapseExample">
                 <p><span id="randomPhrase" class="mb-3"></span></p>
               </div>
-              <button class="btn btn-info mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="show-translation">
+              <button class="btn btn-info mb-3" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" id="show-translation-btn">
                   Show Translation
                 </button>
             </div>
-            <button class="btn btn-primary" id="study-start">Generate Random Word</button>
+            <button class="btn btn-primary" id="gen-phrase-btn">Generate Random Word</button>
           </div>
         </div>
       </div>

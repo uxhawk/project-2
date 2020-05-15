@@ -93,6 +93,19 @@ module.exports = function(app) {
     res.render('metrics');
   });
   app.get('/study', isAuthenticated, function(req, res) {
-    res.render('study');
+    const appLanguages = [];
+    db.language.findAll({}).then((data) => {
+      data.forEach((row) => {
+        const currentRow = {
+          id: row.id,
+          lang_code: row.lang_code,
+          lang: row.lang,
+        };
+        appLanguages.push(currentRow);
+      });
+      res.render('study', {
+        languages: appLanguages,
+      });
+    });
   });
 };

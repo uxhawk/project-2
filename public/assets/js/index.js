@@ -127,22 +127,6 @@ $(document).ready(function() {
   //   $('#myChart').show();
   // }
 
-  // functions for study mode
-  $('#show-translation').hide();
-  $('#study-start').click(function() {
-    // randomly pick a card from the vocab array
-    const randomCard = vocab[Math.floor(Math.random()*vocab.length)];
-    $('#show-translation').show();
-    $('#collapseExample').collapse('hide');
-    $('#study-card').empty();
-    $('#random-phrase').text('');
-
-    // print the contents of that card into the study-card body
-    const par = $('<p>');
-    par.text(randomCard.translation);
-    $('#study-card').append(par);
-    $('#randomPhrase').text(randomCard.orig_phrase);
-  });
 
   // delete route to remove a card
   $(document).on('click', 'i.fa-trash-alt', function() {
@@ -225,6 +209,59 @@ $(document).ready(function() {
         printCard(phrase);
       });
     }
+  });
+
+  $('#gen-phrase-btn').prop('disabled', true);
+  // filter for study mode
+  $(document).on('change', '#study-language', function() {
+    $('#lang-alert, #phrase, #show-translation-btn').hide();
+    $('#randomPhrase').text('');
+    $('#collapseExample').collapse('hide');
+
+    // eslint-disable-next-line no-invalid-this
+    if ($(this).val() !== 'Select Language') {
+      filtered = [];
+      vocab.forEach((phrase)=> {
+        if (phrase.target_id == $('#study-language option:selected').
+            attr('data-id')) {
+          filtered.push(phrase);
+        }
+      });
+
+      if (filtered.length === 0 &&
+        $('#study-language option:selected').val() !== 'select-language') {
+
+        $('#study-start').prop('disabled', true);
+        $('.card-body').prepend(`<div id="lang-alert" 
+        class="alert alert-warning" role="alert">
+        You don't have anything in the word bank for
+        ${$('#study-language option:selected').val()}. 
+        Please choose a different language.</div>`);
+        return;
+      }
+      $('#gen-phrase-btn').prop('disabled', false);
+    }
+  });
+
+  // functions for study mode
+  $('#show-translation-btn').hide();
+  $('#gen-phrase-btn').click(function() {
+    // randomly pick a card from the vocab array
+    $('#random-phrase').text('');
+    $('#collapseExample').collapse('hide');
+    const randNum = Math.floor(Math.random() * filtered.length);
+    const randomCard = filtered[randNum];
+    console.log(filtered.length, randNum);
+    $('#show-translation-btn').show();
+
+    $('#study-card').empty();
+
+    // print the contents of that card into the study-card body
+    const par = $('<p id="phrase">');
+    par.text(randomCard.translation);
+    $('#randomPhrase').text(randomCard.orig_phrase);
+    $('#study-card').append(par);
+   
   });
 
   /**
