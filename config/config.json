@@ -5,8 +5,8 @@
     "database": "vocabulary_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false,
-    "api_key":12345
+    "operatorsAliases": false
+    // "api_key":12345
   },
   "test": {
     "username": "root",
@@ -19,6 +19,7 @@
   "production": {
     "username": "root",
     "password": null,
+    "use_env_variable": "JAWSDB_URL",
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql",
