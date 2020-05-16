@@ -12,7 +12,7 @@ const mysql = require('mysql');
 
 let connection;
 if (process.env.JAWSDB_URL) {
-  connection = mysql.createConnection(process.env.JAWSDB_URL)
+  connection = mysql.createConnection(process.env.JAWSDB_URL);
 } else {
   const sequelize = new Sequelize('sequelize_library', 'root', '', {
     host: 'localhost',
