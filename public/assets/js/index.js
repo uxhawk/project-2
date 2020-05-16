@@ -86,8 +86,7 @@ $(document).ready(function() {
     $.ajax({
       method: 'GET',
       url: '/api/vocab/details',
-    }).then((data) =>{
-
+    }).then((data) => {
       const charCounts = [];
       const wordCounts = [];
       const labels = [];
@@ -146,7 +145,6 @@ $(document).ready(function() {
       });
     });
   }
-
 
   // delete route to remove a card
   $(document).on('click', 'i.fa-trash-alt', function() {
