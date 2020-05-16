@@ -5,7 +5,8 @@
     "database": "vocabulary_db",
     "host": "127.0.0.1",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "operatorsAliases": false,
+    "api_key":12345
   },
   "test": {
     "username": "root",

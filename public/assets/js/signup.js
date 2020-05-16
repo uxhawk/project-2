@@ -13,9 +13,16 @@ $(document).ready(function() {
       password: passwordInput.val().trim(),
     };
 
-    if (!userData.email || !userData.password) {
+    if (!userData.email) {
+      alert('Please enter an email address to sign up.');
       return;
     }
+
+    if (!userData.password) {
+      alert('Please enter an password for your account.');
+      return;
+    }
+
     // If we have an email and password, run the signUpUser function
     signUpUser(userData.email, userData.password);
     emailInput.val('');
