@@ -78,55 +78,73 @@ $(document).ready(function() {
     console.log(vocab);
   });
 
-  // const hasChart = $('body').has('canvas');
+  const hasChart = $('body').has('canvas');
   // $('#myChart').hide();
-  // if (hasChart.length !==0) {
-  //   // ajax call to get details about all details in the person's db
+  if (hasChart.length !==0) {
+    // ajax call to get details about all details in the person's db
 
-  //   $.ajax({
-  //     method: 'GET',
-  //     url: '/api/vocab/details',
-  //   }).then((data) =>{
-  //     const phrases = data.filter((row) => row.target_id = 2);
-  //     const phraseChars = [];
-  //     phrases.forEach((row) => {
-  //       phraseChars.push(row.word_count);
-  //     });
-  //     const labels = [];
-  //     phrases.forEach((row) => {
-  //       labels.push(row.translation);
-  //     });
+    $.ajax({
+      method: 'GET',
+      url: '/api/vocab/details',
+    }).then((data) => {
+      const charCounts = [];
+      const wordCounts = [];
+      const labels = [];
+      data.forEach((row)=> {
+        wordCounts.push(row.word_count);
+        charCounts.push(row.character_count);
+        labels.push(row.translation);
+      });
+      console.log(charCounts);
+      console.log(wordCounts);
 
-
-  //     const ctx = document.getElementById('myChart').getContext('2d');
-  //     // eslint-disable-next-line no-unused-vars
-  //     const chart = new Chart(ctx, {
-  //       // The type of chart we want to create
-  //       type: 'line',
-
-  //       // The data for our dataset
-  //       data: {
-  //         labels: labels,
-  //         datasets: [{
-  //           fill: false,
-  //           borderColor: 'rgb(255, 99, 132)',
-  //           data: phraseChars,
-  //         }],
-  //       },
-
-  //       // Configuration options go here
-  //       options: {
-  //         elements: {
-  //           line: {
-  //             fill: false,
-  //           },
-  //         },
-  //       },
-  //     });
-  //   });
-  //   $('#myChart').show();
-  // }
-
+      if (charCounts.length === 0) {
+        $('#myChart').hide();
+        $('#instructions').text(`No words in the word bank yet.`);
+      }
+      const ctx = document.getElementById('myChart').getContext('2d');
+      // eslint-disable-next-line no-unused-vars
+      const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: '# of Characters',
+            data: charCounts,
+            fill: false,
+            backgroundColor: [
+              'rgba(255, 99, 132)',
+            ],
+            borderColor: [
+              'rgba(255, 99, 132)',
+            ],
+            borderWidth: 1,
+          },
+          {
+            label: '# of Words',
+            data: wordCounts,
+            fill: false,
+            backgroundColor: [
+              'rgba(105, 99, 132)',
+            ],
+            borderColor: [
+              'rgba(105, 99, 132)',
+            ],
+            borderWidth: 1,
+          }],
+        },
+        options: {
+          scales: {
+            yAxes: [{
+              ticks: {
+                beginAtZero: true,
+              },
+            }],
+          },
+        },
+      });
+    });
+  }
 
   // delete route to remove a card
   $(document).on('click', 'i.fa-trash-alt', function() {
