@@ -55,7 +55,10 @@ $(document).ready(function() {
  * @param {err} err The err response from the backend.
  */
   function handleLoginErr(err) {
-    $('#alert .msg').text(err.responseJSON);
+    // $('#alert .msg').text(err.responseJSON);
+    console.log(err.responseJSON);
+    $('#alert .msg').text(`The email 
+    ${err.responseJSON.errors[0].value} is already registered.`);
     $('#alert').fadeIn(500);
   }
 });
